@@ -1,0 +1,14 @@
+mutation RecentBids{
+    createOffer(input: {
+        message:$String,
+        amount: $Int
+    }
+    productId: Int)
+    {
+        errors
+        offer{
+            amount
+        }
+    }
+}
+

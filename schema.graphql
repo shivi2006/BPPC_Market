@@ -1,0 +1,183 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Category {
+    name: String!
+    products: [Product]
+}
+
+type CreateOffer {
+    errors: [String]!
+    offer: ProductOffer
+    ok: Boolean!
+    query: Query!
+}
+
+type CreateProduct {
+    errors: [String]!
+    ok: Boolean!
+    product: Product
+    query: Query!
+}
+
+type CreateUserReport {
+    errors: [String]!
+    ok: Boolean!
+    query: Query!
+    userReport: UserReport
+}
+
+type Mutation {
+    createOffer(input: ProductOfferInput, productId: Int!): CreateOffer
+    createProduct(input: ProductInput): CreateProduct
+    createUserReport(input: UserReportInput): CreateUserReport
+    updateProduct(id: Int!, input: ProductInput): UpdateProduct
+    updateProfile(input: ProfileUpdateInput, username: String!): UpdateProfile
+    updateWishlist(id: Int!): UpdateWishlist
+}
+
+type Product {
+    category: Category
+    createdAt: DateTime!
+    description: String!
+    expectedPrice: Int!
+    id: ID!
+    images: [String]
+    isNegotiable: Boolean!
+    name: String!
+    offers: [ProductOffer]
+    questions: [ProductQnA]
+    seller: Profile
+    sold: Boolean!
+    visible: Boolean!
+}
+
+type ProductOffer {
+    amount: Int!
+    message: String!
+    offerer: Profile!
+    product: Product!
+}
+
+type ProductPaginated {
+    hasNext: Boolean
+    hasPrev: Boolean
+    objects: [Product]
+    page: Int
+    pages: Int
+}
+
+type ProductQnA {
+    answer: String!
+    askedBy: Profile!
+    isAnswered: Boolean!
+    product: Product!
+    question: String!
+}
+
+type Profile {
+    avatar: String
+    contactNo: String
+    email: String!
+    hostel: String
+    id: ID!
+    name: String!
+    offers: [ProductOffer]
+    products: [Product]
+    rating: Float!
+    reports: [UserReport]
+    username: String
+}
+
+type Query {
+    allCategories: [Category]
+    allProfiles: [Profile]
+    category(name: String): Category
+    myProfile: Profile
+    product(id: Int): Product
+    productOffer(id: Int): [ProductOffer]
+    products(page: Int, pagesize: Int): ProductPaginated
+    profile(email: String, id: Int, username: String): Profile
+    wishlist: [Product]
+}
+
+type UpdateProduct {
+    errors: [String]!
+    ok: Boolean!
+    product: Product
+    query: Query!
+}
+
+type UpdateProfile {
+    errors: [String]!
+    ok: Boolean!
+    profile: Profile
+    query: Query!
+}
+
+type UpdateWishlist {
+    errors: [String]!
+    ok: Boolean!
+    query: Query!
+    wishlist: Wishlist
+}
+
+type UserReport {
+    category: UserReportCategory!
+    reportedBy: Profile!
+    reportedUser: Profile!
+}
+
+type Wishlist {
+    id: ID!
+    products: [Product]
+    profile: Profile
+}
+
+"An enumeration."
+enum UserReportCategory {
+    "Spam"
+    A_1
+    "Profanity"
+    A_2
+    "Refusal to Pay"
+    A_3
+}
+
+input ProductInput {
+    categoryId: Int
+    description: String
+    expectedPrice: Int
+    id: ID
+    isNegotiable: Boolean
+    name: String
+}
+
+input ProductOfferInput {
+    amount: Int
+    id: ID
+    message: String
+}
+
+input ProfileUpdateInput {
+    contactNo: String
+    hostel: String
+    name: String
+}
+
+input UserReportInput {
+    category: Int
+    reportedUser: String
+}
+
+
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime

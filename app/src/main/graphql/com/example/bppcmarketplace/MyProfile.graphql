@@ -1,0 +1,8 @@
+query MyProfile{
+    myProfile{
+        name
+        hostel
+        email
+        contactNo
+    }
+}

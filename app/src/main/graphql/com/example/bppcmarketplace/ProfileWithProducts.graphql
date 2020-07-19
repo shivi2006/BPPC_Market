@@ -1,0 +1,15 @@
+query ProfileWithProducts{
+    myProfile{
+        name
+        hostel
+        email
+        contactNo
+        products{
+            name
+            expectedPrice
+            description
+            images
+            sold
+        }
+    }
+}

@@ -1,0 +1,21 @@
+query getProductList($page:Int!){
+    products(page: $page) {
+        page
+        pages
+        hasNext
+        hasPrev
+        objects{
+            id
+            images
+            sold
+            name
+            expectedPrice
+            category{
+                name
+            }
+            seller {
+                name
+            }
+        }
+    }
+}
