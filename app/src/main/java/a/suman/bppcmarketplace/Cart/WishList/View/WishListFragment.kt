@@ -49,7 +49,7 @@ class WishListFragment : Fragment() {
             Log.d("Called Wishlist", "adapter")
 
             wishListViewModel.wishListLiveData.observe(viewLifecycleOwner, Observer {
-            wishListAdapter.setData(it as List<GetWishListQuery.Wishlist>)
+            wishListAdapter.setData(it)
                 Log.d("Called Wishlist", "Set data")
        }
        )

@@ -24,16 +24,9 @@ class WishListRepo(application: Application) {
     lateinit var disposable: Disposable
     val appDatabase = BPPCDatabase.getBPPCDatabase(application)
 
-        fun getWishListObservable(): Observable<Response<GetWishListQuery.Data>> {
-            return appDatabase.getAuthenticationServices().getBasicUserData()
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMapObservable {
-                    getApolloClient()
-                }
-        }
 
-        fun getApolloClient(): Observable<Response<GetWishListQuery.Data>> {
+
+        fun getWishListObservable(): Observable<Response<GetWishListQuery.Data>> {
             return Rx2Apollo.from(
                 ApolloConnector.setUpApollo().query(
                     GetWishListQuery()
@@ -41,9 +34,5 @@ class WishListRepo(application: Application) {
             )
         }
 
-
-        fun dispose() {
-            disposable.dispose()
-        }
     }
 

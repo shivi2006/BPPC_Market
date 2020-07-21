@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.recycler_view_wishlist.view.*
 
 class WishListAdapter:RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
 
-    var list: List<GetWishListQuery.Wishlist> = emptyList()
+    var list: List<GetWishListQuery.Wishlist?> = emptyList()
     override fun onCreateViewHolder(p: ViewGroup, viewType: Int): ViewHolder {
         val view= LayoutInflater.from(p.context).inflate(R.layout.recycler_view_wishlist,p,false)
         return ViewHolder(view)
@@ -27,16 +27,17 @@ class WishListAdapter:RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
     }
 
 
-    fun setData(list:List<GetWishListQuery.Wishlist>){
+    fun setData(list:List<GetWishListQuery.Wishlist?>){
         this.list = list
         notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(wishlist: GetWishListQuery.Wishlist) {
-            itemView.product_name.text = wishlist.name
-
+        fun bindItems(wishlist: GetWishListQuery.Wishlist?) {
+            if(wishlist!=null) {
+                itemView.product_name.text = wishlist.name
+            }
         }
 
     }
